@@ -1,7 +1,6 @@
 # 合盖运行
 
 让 MacBook 合上盖子后继续运行（跑 agent、跑长任务），到时自动恢复正常休眠。
-2026-09-01 由 Claude Code 从三处散落位置搜集建立，**原件全部保留在原位**。
 
 ## 背景
 
@@ -18,48 +17,36 @@ scripts/
   合盖持续运行.command          电源版：1–24 小时，要求接 AC
   合盖持续运行_电池临时.command  电池版：1–4 小时，要求用电池，电量 ≤10% 自动停
 gui/
-  合盖运行控制.applescript      双击弹窗控制（开启 / 关闭），AppleScript 版
-  合盖运行控制.js               同上，JXA 版（.app 内嵌的是这一份）
+  ClamshellControl.swift         原生 SwiftUI 控制面板
 app/
-  合盖运行控制.app              已构建的双击启动器
+  合盖运行控制.app              已构建的原生应用
 ```
 
 ## 两个脚本的护栏
 
 共同点：启动前先检查是否已开启（已开启则提供恢复选项）；时长参数校验；
 `sudo -v` 单独取管理员授权；开启后**验证** `SleepDisabled 1` 确实生效，验证不过就退出；
-每 30 秒轮询一次电源状态；`trap ... EXIT` 保证到时、断电、Ctrl+C、终止、异常退出
+每 2 秒检查合盖状态，检测到合盖后立即锁定屏幕并进入低电量模式；开盖或会话结束时恢复原有低电量设置；`trap ... EXIT` 保证到时、断电、Ctrl+C、终止、异常退出
 **都会**执行 `pmset disablesleep 0`；内置 `--self-test` 模式做参数校验自检。
+
+锁屏依赖系统“关闭显示器后要求输入密码”设置为“立即”；不满足时脚本会拒绝开启。
 
 | | 电源版 | 电池临时版 |
 |---|---|---|
 | 前置条件 | 必须 AC Power | 必须 Battery Power |
-| 时长 | 1–24 小时（默认 4） | 1–4 小时（默认 1） |
+| 时长 | 1–24 小时或不限时（默认 4） | 1–4 小时或不限时（默认 1） |
 | 作用域 | `pmset -a`（全局） | `pmset -b`（仅电池） |
 | 额外保护 | 断电即恢复 | 断电即恢复 + 电量 ≤10% 即恢复 |
 
-## 出处
+## 构建与安装
 
-| 本仓库路径 | 原始位置 |
-|---|---|
-| `scripts/*.command` | `~/Documents/ChatGPT/多agent工作/` |
-| `gui/合盖运行控制.applescript`、`gui/合盖运行控制.js` | `~/Documents/Codex/2026-08-31/xiay/outputs/` |
-| `app/合盖运行控制.app` | `~/Desktop/合盖运行控制.app` |
+应用会把两份安全脚本复制到自身资源目录，不再依赖旧文档路径：
 
-未收录：`xiay/a.scpt`（编译后的 AppleScript 存根，只是激活 Finder，与本项目无关）。
-
-## ⚠️ 路径耦合
-
-`app/合盖运行控制.app` 内嵌的脚本把启动器路径**硬编码**为：
-
+```sh
+make test       # 构建、签名并自检
+make install    # 同步到桌面
+make package    # 生成 dist/合盖运行控制-v2.0.0-macos.zip
 ```
-/Users/ben/Documents/ChatGPT/多agent工作/合盖持续运行_电池临时.command
-```
-
-两个 GUI 源码里也是同一个硬编码路径。因为搜集是**复制**而非移动，
-桌面上的 `.app` 现在照常可用。但如果以后删掉或移动 `~/Documents/ChatGPT/多agent工作/`，
-`.app` 就会失效。届时需要把路径改成 `~/Documents/合盖运行/scripts/合盖持续运行_电池临时.command`
-并重新构建 `.app`。
 
 ## 验证状态
 

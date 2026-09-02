@@ -4,67 +4,40 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/Assets.car</key>
+		<key>Resources/Scripts/合盖持续运行.command</key>
 		<data>
-		eW6w8QqIr7jNAjxtch9MY/ppZuA=
+		WZjCFNZP6wXAPplrhrTwsACmIzA=
 		</data>
-		<key>Resources/Scripts/main.scpt</key>
+		<key>Resources/Scripts/合盖持续运行_电池临时.command</key>
 		<data>
-		+op8Q3CSO4vFSa+9VXHyQrGZjWI=
+		C0k+lTJjp42PlO/xMQPKmqsSHC4=
 		</data>
 		<key>Resources/applet.icns</key>
 		<data>
 		sINd6lbiqHD5dL8c6u79cFvVXhw=
 		</data>
-		<key>Resources/applet.rsrc</key>
-		<data>
-		kj5W1ZUXZ0gK8hHFC3i6TB1cB5Y=
-		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Resources/Assets.car</key>
+		<key>Resources/Scripts/合盖持续运行.command</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			eW6w8QqIr7jNAjxtch9MY/ppZuA=
-			</data>
 			<key>hash2</key>
 			<data>
-			WwOPCDI+0scadm/UjmU46ZPp9SpafTRKbykxQ20eADo=
+			MpFoCrYJwQeEICRPQKfEgJ8FRXOFIBcbfPCzmPfmKao=
 			</data>
 		</dict>
-		<key>Resources/Scripts/main.scpt</key>
+		<key>Resources/Scripts/合盖持续运行_电池临时.command</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			+op8Q3CSO4vFSa+9VXHyQrGZjWI=
-			</data>
 			<key>hash2</key>
 			<data>
-			qkDD0b7Up5L+AfjHhM940pmKXjgZ5CFGwhmCIeadWMs=
+			yqRCUErvDlbGUBhb0NqDaQDQcqQpGlwexPFRvwJv7S8=
 			</data>
 		</dict>
 		<key>Resources/applet.icns</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			sINd6lbiqHD5dL8c6u79cFvVXhw=
-			</data>
 			<key>hash2</key>
 			<data>
 			J7weZ6vlnv9r32tS5HFcyuPXl2StdDnfepLxAixlryk=
-			</data>
-		</dict>
-		<key>Resources/applet.rsrc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			kj5W1ZUXZ0gK8hHFC3i6TB1cB5Y=
-			</data>
-			<key>hash2</key>
-			<data>
-			AR2pdMxhSOTLQLThE3xjNpyWtvow3vyYbfbJUqin/8o=
 			</data>
 		</dict>
 	</dict>
